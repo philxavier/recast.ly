@@ -4,7 +4,7 @@ var VideoListEntry = (video) => (
       <img className="media-object" src={video.video.snippet.thumbnails.default.url} alt="" />
     </div>
     <div className="media-body">
-      <div className="video-list-entry-title">{video.video.snippet.title}</div>
+      <div className="video-list-entry-title" onClick = {video.handleClick}>{video.video.snippet.title}</div>
       <div className="video-list-entry-detail">{video.video.snippet.description}</div>
     </div>
   </div>
