@@ -7,7 +7,6 @@ class App extends React.Component {
   }
 
   handleClick(e) {
-    debugger;
     var video = e.target.innerText;
     var result;
     for (let i = 0; i < exampleVideoData.length; i++) {
