@@ -1,4 +1,4 @@
-var searchYouTube = (options = { query: 'test', max: '5', key: window.YOUTUBE_API_KEY }, callback) => {
+var searchYouTube = (options, callback) => {
   $.ajax({
     url: 'https://www.googleapis.com/youtube/v3/search',
     type: 'GET',

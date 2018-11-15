@@ -1,9 +1,27 @@
 class App extends React.Component {
 
   constructor(props) {
+    
     super(props);
-    this.state = {video: exampleVideoData[0]};
+
+    this.state = { 
+      video: window.exampleVideoData[0],
+      videoList: window.exampleVideoData
+    };
     this.handleClick = this.handleClick.bind(this);
+    this.updateList = this.updateList.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.searchVideo({query: 'rock and roll', max: '5', key: window.YOUTUBE_API_KEY}, this.updateList);
+  }
+
+  updateList(list) {
+    this.setState({
+      videoList: list,
+      video: list[0]
+    });
+    console.log('List here', this.state.videoList[0]);
   }
 
   handleClick(e) {
@@ -16,7 +34,7 @@ class App extends React.Component {
       }
     }
     this.setState({
-      video: exampleVideoData[result]
+      video: exampleVideoData[result],
     });
   }
 
@@ -33,7 +51,7 @@ class App extends React.Component {
             <VideoPlayer video = {this.state.video} />
           </div>
           <div className="col-md-5">
-            <VideoList videos = {exampleVideoData} handleClick = {this.handleClick}/> 
+            <VideoList videos = {this.state.videoList} handleClick = {this.handleClick}/> 
           </div>
         </div>
       </div>
