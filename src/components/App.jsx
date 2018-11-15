@@ -10,10 +10,11 @@ class App extends React.Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.updateList = this.updateList.bind(this);
+    this.onKeyPress = this.onKeyPress.bind(this);
   }
 
   componentDidMount() {
-    this.props.searchVideo({query: 'rock and roll', max: '5', key: window.YOUTUBE_API_KEY}, this.updateList);
+    this.props.searchVideo({query: 'Messi', max: '5', key: window.YOUTUBE_API_KEY}, this.updateList);
   }
 
   updateList(list) {
@@ -27,23 +28,32 @@ class App extends React.Component {
   handleClick(e) {
     var video = e.target.innerText;
     var result;
-    for (let i = 0; i < exampleVideoData.length; i++) {
-      if (exampleVideoData[i].snippet.title === video) {
+    for (let i = 0; i < this.state.videoList.length; i++) {
+      if (this.state.videoList[i].snippet.title === video) {
         result = i;
         break;
       }
     }
     this.setState({
-      video: exampleVideoData[result],
+      video: this.state.videoList[result],
     });
   }
+
+
+  onKeyPress(e) {
+    var search = {max: '5', key: window.YOUTUBE_API_KEY};
+    search.query = e.target.value;
+    var handleSearch = _.debounce(this.props.searchVideo, 500);
+    handleSearch(search, this.updateList);
+  }
+
 
   render() {
     return (
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search />
+            <Search onKeyPress = {this.onKeyPress} />
           </div>
         </nav>
         <div className="row">
