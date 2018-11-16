@@ -13,6 +13,7 @@ describe ('Search', function() {
       searchYouTubeStub = sinon.stub();
       searchYouTubeStub.onCall(0).yields(window.fakeVideoData);
       searchYouTubeStub.onCall(1).yields(window.moreFakeVideoData);
+      searchYouTubeStub.onCall(2).yields(window.moreFakeVideoData);
 
       app = renderIntoDocument(
         <App searchYouTube={searchYouTubeStub} />
@@ -39,6 +40,7 @@ describe ('Search', function() {
       newVideoEntryTitleElements.forEach((videoEntryTitle, i) => {
         console.log(moreFakeVideoData[i].snippet.title);
         console.log(videoEntryTitle.innerHTML);
+        console.log(searchInputElement.target);
 
         expect(videoEntryTitle.innerHTML).to.equal(moreFakeVideoData[i].snippet.title);
       });

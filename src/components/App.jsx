@@ -14,7 +14,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.props.searchYouTube({query: 'NBA', max: '5', key: window.YOUTUBE_API_KEY}, this.updateList);
+    this.props.searchYouTube({query: 'React tutorial', max: '5', key: window.YOUTUBE_API_KEY}, this.updateList);
   }
 
   updateList(list) {
@@ -40,8 +40,11 @@ class App extends React.Component {
 
 
   onKeyPress(e) {
+
     var search = {max: '5', key: window.YOUTUBE_API_KEY};
+
     search.query = e.target.value;
+    console.log('Search Query', search.query);
     var handleSearch = _.debounce(this.props.searchYouTube, 500);
     handleSearch(search, this.updateList);
   }
